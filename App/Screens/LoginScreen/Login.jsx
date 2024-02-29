@@ -1,8 +1,34 @@
 import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import color from '../../utils/color';
+import * as WebBrowser from "expo-web-browser";
+import { useOAuth } from "@clerk/clerk-expo";
+import { useWarmUpBrowser } from "../../hooks/useWarmUpBrowser";
+ 
+WebBrowser.maybeCompleteAuthSession();
 
 export default function Login() {
+    useWarmUpBrowser();
+
+    const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
+    const onPress = React.useCallback(async () => {
+        try {
+          const { createdSessionId, signIn, signUp, setActive } =
+            await startOAuthFlow();
+     
+          if (createdSessionId) {
+            setActive({ session: createdSessionId });
+          } else {
+            // Use signIn or signUp for next steps such as MFA
+          }
+        } catch (err) {
+          console.error("OAuth error", err);
+        }
+      }, []);
+     
+      
+
+
   return (
     <View style={{alignItems:'center'}}>
       <Image 
@@ -18,7 +44,7 @@ export default function Login() {
           <Text style={{fontSize:17,color:color.WHITE, textAlign:'center', marginTop:20}}>
             Best App to find services near you which deliver you a professional service.
           </Text>
-          <TouchableOpacity style={styles.button} onPress={()=>console.log("helooo")}>
+          <TouchableOpacity style={styles.button} onPress={onPress}>
           <Text style={{textAlign:'center',fontSize: 17, color:color.PRIMARY}}>
           Let's Get Started
           </Text>
@@ -51,6 +77,8 @@ button:{
     padding:15,
     borderRadius: 99,
     backgroundColor:color.WHITE,
-    marginTop: 40
+    marginTop: 40,
+    cursor: 'pointer'
 }
+
 });
