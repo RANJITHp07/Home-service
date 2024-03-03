@@ -1,4 +1,4 @@
-import { View, Text,StyleSheet,FlatList, ActivityIndicator,Image } from 'react-native'
+import { View, Text,TouchableOpacity,FlatList, ActivityIndicator,Image } from 'react-native'
 import React,{useEffect, useState} from 'react'
 import GlobalApi from '../../utils/GlobalApi'
 import color from '../../utils/color'
@@ -20,12 +20,12 @@ export default function Latest() {
 
      // rendering the items of the slider
     const renderItem = ({ item }) => (
-        <View style={{marginRight:20, padding:10, backgroundColor: color.WHITE}}>
+        <TouchableOpacity style={{marginRight:20, padding:10, backgroundColor: color.WHITE}}>
           <Image source={{uri:item?.image[0].url}} style={{width:270 , height:150}} />
           <Text style={{fontFamily:'outfit-medium', fontSize:17, marginTop: 10}}>{item.name}</Text>
           <Text style={{fontFamily:'outfit', fontSize:15}}>{item.contactPerson[0].toUpperCase()+item.contactPerson.slice(1,item.contactPerson.length).toLowerCase()}</Text>
           <Text style={{color:color.PRIMARY}}>{item.category.name}</Text>
-        </View>
+        </TouchableOpacity>
       );
   return (
     <View style={{marginTop: 20}}>

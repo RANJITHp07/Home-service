@@ -8,6 +8,7 @@ import { Entypo } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import color from '../utils/color';
+import HomeNavigation from './HomeNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +20,7 @@ export default function TabNavigation() {
         tabBarActiveTintColor: color.PRIMARY
       }}
     >
-      <Tab.Screen name="Home" component={HomeScreen}
+      <Tab.Screen name="Home" component={HomeNavigation}
        options={{
         tabBarLabel:({color})=>(
             <Text style={{color:color, fontSize:12 , marginTop:-7}}>Home</Text>

@@ -61,12 +61,16 @@ const getCategoryBuisness=async(category)=>{
   const query=gql`
  query CategoryBuisness {
   buisnessLists(where: {category:{name: "`+category+`"}}) {
+    id,
     name,
     contactPerson,
     address
     category{
     name
-    }
+    },
+    image{
+    
+    url}
   }
 }
   `
