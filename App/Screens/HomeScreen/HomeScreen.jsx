@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import React from 'react'
 import Header from './Header'
 import Slider from './Slider'
@@ -7,6 +7,7 @@ import Latest from './Latest'
 
 export default function HomeScreen() {
   return (
+    <ScrollView>
     <View>
       <Header/>
       <View style={{padding: 20}}>      
@@ -16,5 +17,6 @@ export default function HomeScreen() {
       </View>
 
     </View>
+    </ScrollView>
   )
 }

@@ -1,18 +1,22 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import color from '../../utils/color'
 import { Entypo } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function BuisnessListItem({buisness}) {
+    const navigation=useNavigation()
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={()=>navigation.push('buisness-detail',{
+        buisness:buisness
+    })}>
       <Image style={styles.containerImage} source={{uri: buisness.image[0].url}}/>
       <View style={styles.subContainer}>
         <Text style={{fontFamily:'outfit',color:color.GRAY,fontSize:15}}>{buisness.contactPerson[0].toUpperCase()+ buisness.contactPerson.slice(1,buisness.contactPerson.length).toLowerCase()}</Text>
         <Text style={{fontFamily:'outfit-bold',fontSize: 19}}>{buisness.name[0].toUpperCase()+ buisness.name.slice(1,buisness.name.length).toLowerCase()}</Text>
         <Text style={{fontFamily:'outfit',fontSize: 15}}><Entypo name="location-pin" size={24} color={color.PRIMARY} />{buisness.address}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

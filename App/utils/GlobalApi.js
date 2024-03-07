@@ -69,8 +69,9 @@ const getCategoryBuisness=async(category)=>{
     name
     },
     image{
-    
-    url}
+    url
+    }
+    about
   }
 }
   `
